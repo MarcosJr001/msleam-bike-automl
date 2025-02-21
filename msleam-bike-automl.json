@@ -1,0 +1,47 @@
+{
+    "name": "BikeRentalProject",
+    "location": "East US",
+    "resources": [
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2021-04-01",
+            "name": "BikeRentalResourceGroup",
+            "location": "East US"
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-06-01",
+            "name": "bikerentalstorage",
+            "location": "East US",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "kind": "StorageV2"
+        },
+        {
+            "type": "Microsoft.Sql/servers",
+            "apiVersion": "2021-02-01-preview",
+            "name": "bikerentalserver",
+            "location": "East US",
+            "properties": {
+                "administratorLogin": "adminuser",
+                "administratorLoginPassword": "SecureP@ssword123",
+                "version": "12.0"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/databases",
+            "apiVersion": "2021-02-01-preview",
+            "name": "bikerentaldb",
+            "location": "East US",
+            "properties": {
+                "collation": "SQL_Latin1_General_CP1_CI_AS",
+                "maxSizeBytes": "2147483648",
+                "requestedServiceObjectiveName": "S0"
+            },
+            "dependsOn": [
+                "Microsoft.Sql/servers/bikerentalserver"
+            ]
+        }
+    ]
+}
